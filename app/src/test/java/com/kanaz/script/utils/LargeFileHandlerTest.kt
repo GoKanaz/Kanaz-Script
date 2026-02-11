@@ -1,6 +1,6 @@
 package com.kanaz.script.utils
 import org.junit.Test
-import kotlin.test.assertTrue
+import org.junit.Assert.assertTrue
 class LargeFileHandlerTest {
     @Test
     fun `shouldUseVirtualRendering should return true for large files`() {

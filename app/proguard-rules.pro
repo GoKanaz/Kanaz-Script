@@ -38,3 +38,5 @@
 -dontwarn org.ietf.jgss.**
 -dontwarn org.slf4j.impl.StaticLoggerBinder
 -dontwarn java.lang.ProcessHandle
+-dontwarn javax.lang.model.element.Modifier
+-dontwarn com.google.errorprone.annotations.**
