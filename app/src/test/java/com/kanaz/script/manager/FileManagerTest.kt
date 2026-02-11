@@ -1,4 +1,4 @@
-package com.kanaz.script
+package com.kanaz.script.manager
 import com.kanaz.script.data.FileManager
 import io.mockk.mockk
 import org.junit.Test

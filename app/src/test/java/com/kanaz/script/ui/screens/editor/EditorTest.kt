@@ -1,4 +1,4 @@
-package com.kanaz.script
+package com.kanaz.script.ui.screens.editor
 import com.kanaz.script.ui.screens.editor.EditorState
 import org.junit.Assert.assertEquals
 import org.junit.Test
