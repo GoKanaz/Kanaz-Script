@@ -27,19 +27,19 @@ fun KanazApp() {
             modifier = Modifier.padding(paddingValues)
         ) {
             composable("explorer") {
-                FileExplorerScreen(navController = navController)
+                FileExplorerScreen()
             }
             composable("editor") {
-                EditorScreen(navController = navController)
+                EditorScreen()
             }
             composable("terminal") {
-                TerminalScreen(navController = navController)
+                TerminalScreen()
             }
             composable("tools") {
-                ToolsScreen(navController = navController)
+                ToolsScreen()
             }
             composable("settings") {
-                SettingsScreen(navController = navController)
+                SettingsScreen()
             }
         }
     }
