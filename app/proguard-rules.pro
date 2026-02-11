@@ -33,3 +33,8 @@
 -keepclassmembers class * {
     @javax.inject.Inject <init>(...);
 }
+-dontwarn java.lang.management.ManagementFactory
+-dontwarn javax.management.**
+-dontwarn org.ietf.jgss.**
+-dontwarn org.slf4j.impl.StaticLoggerBinder
+-dontwarn java.lang.ProcessHandle
