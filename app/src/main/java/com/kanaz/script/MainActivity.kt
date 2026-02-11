@@ -10,6 +10,7 @@ import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.Color
 import androidx.core.view.WindowCompat
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
+import com.kanaz.script.ui.navigation.KanazApp
 import com.kanaz.script.ui.theme.KanazScriptTheme
 import dagger.hilt.android.AndroidEntryPoint
 @AndroidEntryPoint

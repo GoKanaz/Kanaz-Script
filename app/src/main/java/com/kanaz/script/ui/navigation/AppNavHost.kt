@@ -24,10 +24,7 @@ fun AppNavHost(
         modifier = Modifier.padding(paddingValues)
     ) {
         composable(Screen.Editor.route) {
-            EditorScreen(
-                onBottomBarVisibilityChange = onBottomBarVisibilityChange,
-                onTopBarVisibilityChange = onTopBarVisibilityChange
-            )
+            EditorScreen()
         }
         composable(Screen.Explorer.route) {
             FileExplorerScreen()
