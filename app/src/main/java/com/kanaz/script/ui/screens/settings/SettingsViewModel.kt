@@ -1,15 +1,14 @@
 package com.kanaz.script.ui.screens.settings
 import android.content.Context
 import androidx.datastore.preferences.core.*
-import androidx.datastore.preferences.preferencesDataStore
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.kanaz.script.dataStore
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
-val Context.dataStore by preferencesDataStore(name = "kanaz_settings")
 object SettingsKeys {
     val FONT_SIZE = intPreferencesKey("font_size")
     val FONT_FAMILY = stringPreferencesKey("font_family")
@@ -183,9 +182,7 @@ class SettingsViewModel @Inject constructor(
     }
     fun <T> saveSetting(key: Preferences.Key<T>, value: T) {
         viewModelScope.launch {
-            context.dataStore.edit { prefs ->
-                prefs[key] = value
-            }
+            context.dataStore.edit { prefs -> prefs[key] = value }
         }
     }
     fun resetToDefaults() {

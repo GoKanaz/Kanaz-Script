@@ -2,8 +2,8 @@ package com.kanaz.script.ui.screens.terminal
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.kanaz.script.dataStore
 import com.kanaz.script.ui.screens.settings.SettingsKeys
-import com.kanaz.script.ui.screens.settings.dataStore
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
 import kotlinx.coroutines.Dispatchers
@@ -112,8 +112,7 @@ class TerminalViewModel @Inject constructor(
             "  mv <src> <dst>- Move/rename file",
             "  echo <text>   - Print text",
             "  whoami        - Show current user",
-            "  date          - Show current date",
-            "  Any other shell commands are supported"
+            "  date          - Show current date"
         )
         helpText.forEach { appendLine(it, LineType.INFO) }
         _state.update { it.copy(isRunning = false) }
