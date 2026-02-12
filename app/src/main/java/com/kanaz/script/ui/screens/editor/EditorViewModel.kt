@@ -2,10 +2,13 @@ package com.kanaz.script.ui.screens.editor
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
+import java.io.File
 import javax.inject.Inject
 @HiltViewModel
 class EditorViewModel @Inject constructor() : ViewModel() {
@@ -58,10 +61,17 @@ class EditorViewModel @Inject constructor() : ViewModel() {
             }
         }
     }
-    private suspend fun loadFileContent(filePath: String): String {
-        return ""
+    private suspend fun loadFileContent(filePath: String): String = withContext(Dispatchers.IO) {
+        val file = File(filePath)
+        if (!file.exists()) throw IllegalArgumentException("File not found: $filePath")
+        if (file.length() > 10 * 1024 * 1024) throw IllegalStateException("File too large (max 10MB)")
+        file.readText(Charsets.UTF_8)
     }
-    private suspend fun saveContentToFile(filePath: String, content: String) {
+    private suspend fun saveContentToFile(filePath: String, content: String) = withContext(Dispatchers.IO) {
+        if (filePath.isBlank()) return@withContext
+        val file = File(filePath)
+        if (!file.parentFile.exists()) file.parentFile.mkdirs()
+        file.writeText(content, Charsets.UTF_8)
     }
 }
 data class EditorState(
