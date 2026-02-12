@@ -183,7 +183,9 @@ class SettingsViewModel @Inject constructor(
     }
     fun <T> saveSetting(key: Preferences.Key<T>, value: T) {
         viewModelScope.launch {
-            context.dataStore.edit { prefs -> prefs[key] = value }
+            context.dataStore.edit { prefs ->
+                prefs[key] = value
+            }
         }
     }
     fun resetToDefaults() {
