@@ -11,57 +11,73 @@ import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.res.stringResource
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.kanaz.script.R
+
 @Composable
 fun BottomBar(navController: NavController) {
-    val items = listOf(
-        Screen.Editor,
-        Screen.Explorer,
-        Screen.Terminal,
-        Screen.Tools,
-        Screen.Settings
-    )
     val navBackStackEntry by navController.currentBackStackEntryAsState()
     val currentRoute = navBackStackEntry?.destination?.route
+
     NavigationBar {
-        items.forEach { screen ->
-            NavigationBarItem(
-                icon = {
-                    when (screen) {
-                        Screen.Editor -> Icon(Icons.Filled.Code, contentDescription = null)
-                        Screen.Explorer -> Icon(Icons.Filled.Folder, contentDescription = null)
-                        Screen.Terminal -> Icon(Icons.Filled.Computer, contentDescription = null)
-                        Screen.Tools -> Icon(Icons.Filled.Widgets, contentDescription = null)
-                        Screen.Settings -> Icon(Icons.Filled.Settings, contentDescription = null)
-                    }
-                },
-                label = {
-                    Text(
-                        when (screen) {
-                            Screen.Editor -> stringResource(R.string.editor)
-                            Screen.Explorer -> stringResource(R.string.explorer)
-                            Screen.Terminal -> stringResource(R.string.terminal)
-                            Screen.Tools -> stringResource(R.string.tools)
-                            Screen.Settings -> stringResource(R.string.settings)
-                        }
-                    )
-                },
-                selected = currentRoute == screen.route,
-                onClick = {
-                    if (currentRoute != screen.route) {
-                        navController.navigate(screen.route) {
-                            popUpTo(navController.graph.startDestinationId) {
-                                saveState = true
-                            }
-                            launchSingleTop = true
-                            restoreState = true
-                        }
-                    }
+        NavigationBarItem(
+            icon = { Icon(Icons.Filled.Code, contentDescription = null) },
+            label = { Text("Editor") },
+            selected = currentRoute?.startsWith("editor") == true,
+            onClick = {
+                navController.navigate("editor") {
+                    popUpTo("explorer") { saveState = true }
+                    launchSingleTop = true
+                    restoreState = true
                 }
-            )
-        }
+            }
+        )
+        NavigationBarItem(
+            icon = { Icon(Icons.Filled.Folder, contentDescription = null) },
+            label = { Text("Explorer") },
+            selected = currentRoute == "explorer",
+            onClick = {
+                navController.navigate("explorer") {
+                    popUpTo("explorer") { inclusive = true }
+                    launchSingleTop = true
+                }
+            }
+        )
+        NavigationBarItem(
+            icon = { Icon(Icons.Filled.Computer, contentDescription = null) },
+            label = { Text("Terminal") },
+            selected = currentRoute == "terminal",
+            onClick = {
+                navController.navigate("terminal") {
+                    popUpTo("explorer") { saveState = true }
+                    launchSingleTop = true
+                    restoreState = true
+                }
+            }
+        )
+        NavigationBarItem(
+            icon = { Icon(Icons.Filled.Widgets, contentDescription = null) },
+            label = { Text("Tools") },
+            selected = currentRoute == "tools",
+            onClick = {
+                navController.navigate("tools") {
+                    popUpTo("explorer") { saveState = true }
+                    launchSingleTop = true
+                    restoreState = true
+                }
+            }
+        )
+        NavigationBarItem(
+            icon = { Icon(Icons.Filled.Settings, contentDescription = null) },
+            label = { Text("Settings") },
+            selected = currentRoute == "settings",
+            onClick = {
+                navController.navigate("settings") {
+                    popUpTo("explorer") { saveState = true }
+                    launchSingleTop = true
+                    restoreState = true
+                }
+            }
+        )
     }
 }
